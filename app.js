@@ -18,6 +18,9 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
+  app.get("/", (req, res) => {
+    res.send("Welcome to the Todo API");
+  });
 
 function auth(req, res, next) {
   const token = req.header("Authorization")?.split(" ")[1];
