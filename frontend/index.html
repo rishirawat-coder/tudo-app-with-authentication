@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo Auth Frontend</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Todo App</h1>
+
+    <section id="auth-section">
+      <div class="card" id="register-card">
+        <h2>Register</h2>
+        <form id="register-form">
+          <input type="text" id="register-username" placeholder="Username" required />
+          <input type="email" id="register-email" placeholder="Email" required />
+          <input type="password" id="register-password" placeholder="Password" required />
+          <button type="submit">Register</button>
+        </form>
+      </div>
+
+      <div class="card" id="login-card">
+        <h2>Login</h2>
+        <form id="login-form">
+          <input type="email" id="login-email" placeholder="Email" required />
+          <input type="password" id="login-password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="todo-section" class="hidden">
+      <div class="toolbar">
+        <h2>Your Todos</h2>
+        <button id="logout-button" class="secondary">Logout</button>
+      </div>
+      <form id="todo-form" class="todo-form">
+        <input type="text" id="todo-title" placeholder="New todo title" required />
+        <button type="submit">Add Todo</button>
+      </form>
+      <ul id="todo-list"></ul>
+    </section>
+
+    <div id="message" class="message"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
