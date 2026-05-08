@@ -4,14 +4,19 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("./models/user");
-const Todo = require("./models/todo");
+const Todo = require("./models/tudo");
 
 const app = express();
 app.use(express.json());
 
-
-mongoose.connect("mongodb://127.0.0.1:27017/todo-auth");
-
+mongoose.connect("mongodb+srv://Rishirawat:rawat1234@rishi.isw4wye.mongodb.net/?appName=Rishi")
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(4000, () => console.log("Server running on port 4000"));
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
 
 function auth(req, res, next) {
   const token = req.header("Authorization")?.split(" ")[1];
@@ -108,5 +113,3 @@ app.delete("/todos/:id", auth, async (req, res) => {
 
   res.status(200).json({ message: "Todo deleted successfully" });
 });
-
-app.listen(4000, () => console.log("Server running on port 4000"));
