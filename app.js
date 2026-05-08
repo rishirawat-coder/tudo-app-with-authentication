@@ -1,5 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -7,6 +9,10 @@ const User = require("./models/user");
 const Todo = require("./models/tudo");
 
 const app = express();
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "*",
+  credentials: true
+}));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -18,9 +24,10 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
-  app.get("/", (req, res) => {
-    res.send("Welcome to the Todo API");
-  });
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the Todo API");
+});
 
 function auth(req, res, next) {
   const token = req.header("Authorization")?.split(" ")[1];
