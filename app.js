@@ -9,10 +9,11 @@ const Todo = require("./models/tudo");
 const app = express();
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://Rishirawat:rawat1234@rishi.isw4wye.mongodb.net/?appName=Rishi")
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
-    app.listen(4000, () => console.log("Server running on port 4000"));
+    const PORT = process.env.PORT || 4000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
@@ -22,7 +23,7 @@ function auth(req, res, next) {
   const token = req.header("Authorization")?.split(" ")[1];
   if (!token) return res.status(401).json({ message: "Token required" });
 
-  jwt.verify(token, "MY_SECRET_KEY", (err, data) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
     req.user = data;
     next();
@@ -65,7 +66,7 @@ app.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       { id: user._id, email: user.email },
-      "MY_SECRET_KEY",
+      process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
