@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:4000";
+const API_BASE_URL = "https://tudo-app-with-authentication-3.onrender.com";
 
 const registerForm = document.getElementById("register-form");
 const loginForm = document.getElementById("login-form");
