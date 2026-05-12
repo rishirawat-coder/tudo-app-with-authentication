@@ -123,4 +123,4 @@ app.delete("/todos/:id", auth, async (req, res) => {
   if (!deleted) return res.status(404).json({ message: "Todo not found" });
 
   res.status(200).json({ message: "Todo deleted successfully" });
-});
+});                                 
